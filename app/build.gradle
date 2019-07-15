@@ -19,6 +19,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 28
@@ -48,6 +49,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$version_kotlin"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$version_kotlin"
 
     // Constraint Layout
     implementation "androidx.constraintlayout:constraintlayout:$version_constraint_layout"
@@ -57,4 +59,5 @@ dependencies {
 
     // Material Design
     implementation "com.google.android.material:material:$version_material"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 }

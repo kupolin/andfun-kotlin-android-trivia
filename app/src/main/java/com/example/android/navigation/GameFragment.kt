@@ -34,6 +34,7 @@ class GameFragment : Fragment() {
     // All questions must have four answers.  We'd want these to contain references to string
     // resources so we could internationalize. (or better yet, not define the questions in code...)
     private val questions: MutableList<Question> = mutableListOf(
+            // default answers[0] is solution
             Question(text = "What is Android Jetpack?",
                     answers = listOf("all of these", "tools", "documentation", "libraries")),
             Question(text = "Base class for Layout?",
