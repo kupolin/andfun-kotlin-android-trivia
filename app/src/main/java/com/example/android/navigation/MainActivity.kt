@@ -17,17 +17,55 @@
 package com.example.android.navigation
 
 import android.os.Bundle
-import android.widget.Button
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.NavigationUI.onNavDestinationSelected
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.android.navigation.databinding.ActivityMainBinding
+import android.view.View
 
 class MainActivity : AppCompatActivity() {
+    lateinit var navController: NavController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         @Suppress("UNUSED_VARIABLE")
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        navController = findNavController(R.id.navHostFragment)
+//        NavigationUI.setupActionBarWithNavController(this, navController)
+        setupActionBarWithNavController(navController)
+        //same as actionBar.setDisplayHomeAsUpEnabled(true) kind of. Except up button is broken until NavigateUp is overriden
     }
+
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.navHostFragment)
+        return navController.navigateUp() || super.onSupportNavigateUp()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        Toast.makeText(this, "onClickedmenuItem", Toast.LENGTH_SHORT).show()
+       // NavigationUI.onNavDestinationSelected()
+        onNavDestinationSelected(item!!, navController)
+        return super.onOptionsItemSelected(item)
+    }
+/*
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.overflow_menu, menu)
+            Toast.makeText(this, "up button tapped onClickf ", Toast.LENGTH_SHORT).show()
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        Toast.makeText(this, "up button tapped onClick ", Toast.LENGTH_SHORT).show()
+        return super.onPrepareOptionsMenu(menu)
+    }
+    */
 }
+
+

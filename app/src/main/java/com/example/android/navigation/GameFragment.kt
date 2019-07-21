@@ -18,12 +18,18 @@ package com.example.android.navigation
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI.onNavDestinationSelected
 import com.example.android.navigation.databinding.FragmentGameBinding
 
 class GameFragment : Fragment() {
@@ -93,10 +99,9 @@ class GameFragment : Fragment() {
         val binding = DataBindingUtil.inflate<FragmentGameBinding>(
             inflater, R.layout.fragment_game, container, false
         )
-
         // Shuffles the questions and sets the question index to the first question.
         randomizeQuestions()
-
+setHasOptionsMenu(true)
         // Bind this fragment class to the layout
         binding.game = this
 
@@ -154,4 +159,6 @@ class GameFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.title =
             getString(R.string.title_android_trivia_question, questionIndex + 1, numQuestions)
     }
+
+
 }
